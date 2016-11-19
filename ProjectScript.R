@@ -24,6 +24,11 @@ summary(modelD)
 #Plot of Displacement vs MPG for modelD
 plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
 lines(Training$Displacement,coef(modelD)[1]+coef(modelD)[2]* Training$Displacement)
+#Residuals
+modelD.res=resid(modelD)  # For Residuals
+hist(modelD.res ,breaks = 25,main = "Residuals for modelD",xlab = 'Residual') # For Histogram
+plot(Training$Displacement,modelD.res,ylab = 'Residuals',xlab = 'Displacement')
+abline(0,0)
 ##############################################
 #2.MPG~HorsePower
 modelH<-lm(MPG~HorsePower, data=Training)
@@ -63,10 +68,10 @@ lines(Training$Displacement,coef(model2DH)[1]+coef(model2DH)[3]*Training$Displac
 model2DW <- lm(MPG ~ Displacement+Weight, data = Training)
 summary(model2DW)
 # Plot of Weight vs MPG for model2DW
-plot(Training$Weight,Training$MPG)
+plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
 lines(Training$Weight,coef(model2DW)[1]+coef(model2DW)[3]*Training$Weight)
 # Plot of Displacement vs MPG for model2DW
-plot(Training$Displacement,Training$MPG)
+plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
 lines(Training$Displacement,coef(model2DW)[1]+coef(model2DW)[2]*Training$Displacement)
 ##############################################
 #7.MPG~Displacement+ Acceleration
@@ -104,10 +109,10 @@ model2WA <- lm(MPG ~ Acceleration+Weight, data = Training)
 summary(model2WA)
 coef(model2WA)
 # Plot of Acceleration vs MPG for model2WA
-plot(Training$Acceleration,Training$MPG)
+plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model2WA)[1]+coef(model2WA)[2]*Training$Acceleration)
 #Plot of Weight vs MPG for model2WA
-plot(Training$Weight, Training$MPG)   
+plot(Training$Weight, Training$MPG,xlab = 'Weight', ylab = 'MPG')   
 lines(Training$Weight, coef(model2WA)[1]+coef(model2WA)[3]*Training$Weight)     
 ##########################################################################################################################
 ##########################################################################################################################
@@ -130,26 +135,26 @@ lines(Training$Weight,coef(model3DHW)[1]+coef(model3DHW)[4]*Training$Weight)
 model3DHA <- lm(MPG ~ Displacement+HorsePower+Acceleration, data = Training)
 summary(model3DHA)
 # Plot for Acceleration vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
-plot(Training$Acceleration,Training$MPG)
+plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model3DHA)[1]+coef(model3DHA)[4]*Training$Acceleration)
 # Plot for HorsePower vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
-plot(Training$HorsePower,Training$MPG)
+plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model3DHA)[1]+coef(model3DHA)[3]*Training$HorsePower)
 # Plot for DISPLACEMENT vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
-plot(Training$Displacement,Training$MPG)
+plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
 lines(Training$Displacement,coef(model3DHA)[1]+coef(model3DHA)[2]*Training$Displacement)
 ##############################################
 #13.MPG ~ Displacement+Weight+Acceleration
 model3DWA<- lm(MPG ~ Displacement+Weight+Acceleration, data = Training)
 summary(model3DWA)
 # Plot of Acceleration vs MPG for model3DWA
-plot(Training$Acceleration,Training$MPG)
+plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model3DWA)[1]+coef(model3DWA)[4]*Training$Acceleration)
 # Plot of Weight vs MPG for model3DWA
-plot(Training$Weight,Training$MPG)
+plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
 lines(Training$Weight,coef(model3DWA)[1]+coef(model3DWA)[3]*Training$Weight)
 # Plot of Displacement vs MPG for model3DWA
-plot(Training$Displacement,Training$MPG)
+plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
 lines(Training$Displacement,coef(model3DWA)[1]+coef(model3DWA)[2]*Training$Displacement)
 ##############################################
 #14.Model for MPG Vs HWA
@@ -157,7 +162,7 @@ model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
 summary(model3HWA )
 #Plot of Horsepower vs MPG for model3HWA
 plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
-lines(Training$HorsePower,coef(model3HWA )[1]+coef(model3HWA )[2]*Training$HorsePower)
+lines(Training$HorsePower,coef(model3HWA)[1]+coef(model3HWA )[2]*Training$HorsePower)
 #Plot of Weight vs MPG for model3HWA
 plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
 lines(Training$Weight,coef(model3HWA )[1]+coef(model3HWA )[3]*Training$Weight)
