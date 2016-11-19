@@ -7,7 +7,13 @@ Test<-auto_mpg[301:nrow(auto_mpg),]
 View(Test)
 View(Training)
 summary(Training)
-
+##########################################################################################################################
+##########################################################################################################################
+#Studying the relation between the explanatory and response variables
+plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
+plot(Training$HorsePower,Training$MPG,xlab = "Horsepower",ylab="MPG")
+plot(Training$Weight,Training$MPG,xlab = "Weight",ylab="MPG")
+plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
 ##########################################################################################################################
 ##########################################################################################################################
 #1 variable Model
@@ -134,7 +140,7 @@ abline(0,0)
 plot(Training$Acceleration,model2HA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
 ##############################################
-#MPG ~ Acceleration+Weight   
+#MPG ~ Acceleration+Weight (10)
       
 model2WA <- lm(MPG ~ Acceleration+Weight, data = Training)
 summary(model2WA)
@@ -151,7 +157,7 @@ lines(Training$Weight, coef(model2WA)[1]+coef(model2WA)[3]*Training$Weight)
 ##########################################################################################################################
 #3 variable
 ##############################################
-#MPG ~ Displacement+HorsePower+Weight (10)
+#MPG ~ Displacement+HorsePower+Weight (11)
 model3DHW <- lm(MPG ~ Displacement+HorsePower+Weight, data = Training)
 summary(model3DHW)
 
@@ -169,7 +175,7 @@ lines(Training$Weight,coef(model3DHW)[1]+coef(model3DHW)[4]*Training$Weight)
       
 ##############################################
       
-#MPG ~ Displacement+HorsePower+Acceleration (14)
+#MPG ~ Displacement+HorsePower+Acceleration (12)
 
 
 model3DHA <- lm(MPG ~ Displacement+HorsePower+Acceleration, data = Training)
@@ -196,7 +202,7 @@ plot(Training$Displacement,Training$MPG)
 lines(Training$Displacement,coef(model5)[1]+coef(model5)[4]*Training$Displacement)
 
 ##############################################
-#Model for MPG Vs DWA (11)
+#Model for MPG Vs DWA (13)
 
 model3DWA<- lm(MPG ~ Displacement+Weight+Acceleration, data = Training)
 summary(model3DWA)
@@ -218,7 +224,7 @@ lines(Training$Displacement,coef(model3DWA)[1]+coef(model3DWA)[2]*Training$Displ
 
 
 ##############################################
-#Model for MPG Vs HWA (12)
+#Model for MPG Vs HWA (14)
 model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
 summary(model3HWA )
 
@@ -234,17 +240,12 @@ lines(Training$Weight,coef(model3HWA )[1]+coef(model3HWA )[3]*Training$Weight)
 plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model3HWA )[1]+coef(model3HWA )[4]*Training$Acceleration)
 
-      
-
-
-
-
 ##########################################################################################################################
 ##########################################################################################################################
 
 #4variable Model
 ############################################## 
-#MPG ~ Displacement+ HorsePower + Weight + Acceleration (13)
+#MPG ~ Displacement+ HorsePower + Weight + Acceleration (15)
 
 model4<-lm(MPG ~ Displacement+ HorsePower + Weight + Acceleration, data=Training)
 summary(model4)
