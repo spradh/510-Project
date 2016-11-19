@@ -184,5 +184,7 @@ lines(Training$Weight,coef(model4)[1]+coef(model4)[4]* Training$Weight)
 plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
 lines(Training$Acceleration,coef(model4)[1]+coef(model4)[5]* Training$Acceleration)
 
-
+##########################################################################################################################
+##########################################################################################################################
+# THAT'S ALL FOLKS!
 
