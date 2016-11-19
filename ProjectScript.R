@@ -20,7 +20,7 @@ plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
 ##############################################
 #1.MPG~Displacement
 modelD<-lm(MPG~Displacement, data=Training)
-summary(modelDisp)
+summary(modelD)
 #Plot of Displacement vs MPG for modelD
 plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
 lines(Training$Displacement,coef(modelD)[1]+coef(modelD)[2]* Training$Displacement)
