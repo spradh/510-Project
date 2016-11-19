@@ -38,7 +38,7 @@ plot(Training$HorsePower,Training$MPG,xlab = "Horsepower",ylab="MPG")
 lines(Training$HorsePower,coef(modelH)[1]+coef(modelH)[2]* Training$HorsePower)
 #Residuals
 modelH.res=resid(modelH)  # For Residuals
-hist(modelHp.res ,breaks = 25,main = "Histogram of ModelH",,xlab = 'HorsePower') # For Histogram
+hist(modelH.res ,breaks = 25,main = "Histogram of ModelH",,xlab = 'HorsePower') # For Histogram
 plot(Training$HorsePower,modelH.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 ##############################################
@@ -50,7 +50,7 @@ plot(Training$Weight,Training$MPG,xlab = "Weight",ylab="MPG")
 lines(Training$Weight,coef(modelW)[1]+coef(modelW)[2]* Training$Weight)
 #Residuals
 modelW.res=resid(modelW)  # For Residuals
-hist(modelWeight.res,breaks = 25,main = "Histogram of ModelW",xlab = 'Weight') # For Histogram
+hist(modelW.res,breaks = 25,main = "Histogram of ModelW",xlab = 'Weight') # For Histogram
 plot(Training$Weight,modelW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 ##############################################
@@ -119,7 +119,7 @@ model2DA.res=resid(model2DA)  # For Residuals
 hist(model2DA.res,breaks = 25,main = "Histogram of Model2DA",xlab = 'Displacement') # For Histogram
 plot(Training$Displacement,model2DA.res,ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
-plot(Training$Acceleration,modelAcc.res,ylab = 'Residuals',xlab = 'Acceleration')
+plot(Training$Acceleration,model2DA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
 ##############################################
 #8.MPG ~ HorsePower+Weight 
@@ -136,7 +136,7 @@ model2HW.res=resid(model2HW)  # For Residuals
 hist(model2HW.res,breaks = 25,main = "Histogram of Model2HW",xlab = 'HorsePower') # For Histogram
 plot(Training$HorsePower,model2HW.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
-plot(Training$Weight,modelWeight.res,ylab = 'Residuals',xlab = 'Weight')
+plot(Training$Weight,model2HW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 ##############################################
 #9.MPG ~ HorsePower+Acceleration 
