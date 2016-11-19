@@ -283,7 +283,7 @@ plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
 lines(Training$Acceleration,coef(model4)[1]+coef(model4)[5]* Training$Acceleration)
 #Residuals
 model4.res=resid(model4)  # For Residuals
-hist(model4.res,breaks = 25,main = "Histogram of Model4",xlab = 'Displacement) # For Histogram
+hist(model4.res,breaks = 25,main = "Histogram of Model4",xlab = 'Displacement') # For Histogram
 plot(Training$Displacement,model4.res,ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
 plot(Training$HorsePower,model4.res,ylab = 'Residuals',xlab = 'HorsePower')
