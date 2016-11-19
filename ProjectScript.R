@@ -94,7 +94,7 @@ model2HA<-lm(MPG ~ HorsePower+Acceleration, data = Training)
 summary(model2HA)
 # Plot of Horsepower vs MPG for model2HA
 plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
-lines(Training$HorsePower,coef(model2HA)[1]+coef(model2HA)[2]*Training$HorsePower    
+lines(Training$HorsePower,coef(model2HA)[1]+coef(model2HA)[2]*Training$HorsePower)    
 # Plot of Acceleration vs MPG for model2HA
 plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model2HA)[1]+coef(model2HA)[3]*Training$Acceleration)
