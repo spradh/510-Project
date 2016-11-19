@@ -11,90 +11,32 @@ summary(Training)
 
 #1 variable Model
 
+#Displacement vs MPG
 plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
-
 modelDisp<-lm(MPG~Displacement, data=Training)
 summary(modelDisp)
 lines(Training$Displacement,coef(modelDisp)[1]+coef(modelDisp)[2]* Training$Displacement)
 
-
+#HorsePower vs MPG
 plot(Training$HorsePower,Training$MPG,xlab = "Horsepower",ylab="MPG")
-
 modelHp<-lm(MPG~HorsePower, data=Training)
 summary(modelHp)
 lines(Training$HorsePower,coef(modelHp)[1]+coef(modelHp)[2]* Training$HorsePower)
 
+#Weight vs MPG
 plot(Training$Weight,Training$MPG,xlab = "Weight",ylab="MPG")
-
 modelWeight<-lm(MPG~Weight, data=Training)
 summary(modelWeight)
 lines(Training$Weight,coef(modelWeight)[1]+coef(modelWeight)[2]* Training$Weight)
 
+#Acceleration vs MPG
 plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
 modelAcc<-lm(MPG~Acceleration, data=Training)
 summary(modelAcc)
 lines(Training$Acceleration,coef(modelAcc)[1]+coef(modelAcc)[2]* Training$Acceleration)
+
+
 #2 variable Model
-
-
-
-#4variable Model
-
-model4<-lm(MPG ~ Displacement+ HorsePower + Weight + Acceleration, data=Training)
-summary(model4)
-
-
-plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
-lines(Training$Displacement,coef(model4)[1]+coef(model4)[2]* Training$Displacement)
-
-plot(Training$HorsePower,Training$MPG,xlab = "HorsePower",ylab="MPG")
-lines(Training$HorsePower,coef(model4)[1]+coef(model4)[3]* Training$HorsePower)
-
-plot(Training$Weight,Training$MPG,xlab = "Weight",ylab="MPG")
-lines(Training$Weight,coef(model4)[1]+coef(model4)[4]* Training$Weight)
-
-plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
-lines(Training$Acceleration,coef(model4)[1]+coef(model4)[5]* Training$Acceleration)
-
-#3 variable
-
-#Model for MPG Vs DHW
-
-
-model3a <- lm(MPG ~ Displacement+HorsePower+Weight, data = Training)
-summary(model3a)
-
-plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
-lines(Training$Displacement,coef(model3a)[1]+coef(model3a)[2]*Training$Displacement)
-
-plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
-lines(Training$HorsePower,coef(model3a)[1]+coef(model3a)[3]*Training$HorsePower)
-
-plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
-lines(Training$Weight,coef(model3a)[1]+coef(model3a)[4]*Training$Weight)
-
-#Model for MPG Vs HWA
-
-
-#Model for MPG Vs HWA
-model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
-summary(model3HWA )
-
-
-plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
-lines(Training$HorsePower,coef(model3HWA )[1]+coef(model3HWA )[2]*Training$HorsePower)
-
-
-plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
-lines(Training$Weight,coef(model3HWA )[1]+coef(model3HWA )[3]*Training$Weight)
-
-
-
-
-plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
-lines(Training$Acceleration,coef(model3HWA )[1]+coef(model3HWA )[4]*Training$Acceleration)
-
-
 
 #2 Variable
 #HW
@@ -169,3 +111,63 @@ abline(0,0)
 
 plot(Training$Acceleration,model2DA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+
+
+#4variable Model
+
+model4<-lm(MPG ~ Displacement+ HorsePower + Weight + Acceleration, data=Training)
+summary(model4)
+
+
+plot(Training$Displacement,Training$MPG,xlab = "Displacement",ylab="MPG")
+lines(Training$Displacement,coef(model4)[1]+coef(model4)[2]* Training$Displacement)
+
+plot(Training$HorsePower,Training$MPG,xlab = "HorsePower",ylab="MPG")
+lines(Training$HorsePower,coef(model4)[1]+coef(model4)[3]* Training$HorsePower)
+
+plot(Training$Weight,Training$MPG,xlab = "Weight",ylab="MPG")
+lines(Training$Weight,coef(model4)[1]+coef(model4)[4]* Training$Weight)
+
+plot(Training$Acceleration,Training$MPG,xlab = "Acceleration",ylab="MPG")
+lines(Training$Acceleration,coef(model4)[1]+coef(model4)[5]* Training$Acceleration)
+
+#3 variable
+
+#Model for MPG Vs DHW
+
+
+model3a <- lm(MPG ~ Displacement+HorsePower+Weight, data = Training)
+summary(model3a)
+
+plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
+lines(Training$Displacement,coef(model3a)[1]+coef(model3a)[2]*Training$Displacement)
+
+plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
+lines(Training$HorsePower,coef(model3a)[1]+coef(model3a)[3]*Training$HorsePower)
+
+plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
+lines(Training$Weight,coef(model3a)[1]+coef(model3a)[4]*Training$Weight)
+
+#Model for MPG Vs HWA
+
+
+#Model for MPG Vs HWA
+model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
+summary(model3HWA )
+
+
+plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
+lines(Training$HorsePower,coef(model3HWA )[1]+coef(model3HWA )[2]*Training$HorsePower)
+
+
+plot(Training$Weight,Training$MPG,xlab = 'Weight', ylab = 'MPG')
+lines(Training$Weight,coef(model3HWA )[1]+coef(model3HWA )[3]*Training$Weight)
+
+
+
+
+plot(Training$Acceleration,Training$MPG,xlab = 'Acceleration', ylab = 'MPG')
+lines(Training$Acceleration,coef(model3HWA )[1]+coef(model3HWA )[4]*Training$Acceleration)
+
+
