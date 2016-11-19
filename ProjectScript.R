@@ -133,7 +133,19 @@ abline(0,0)
 
 plot(Training$Acceleration,model2HA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+##############################################
+#MPG ~ Acceleration+Weight   
       
+model2WA <- lm(MPG ~ Acceleration+Weight, data = Training)
+summary(model2WA)
+coef(model2WA)
+# Plot of Acceleration vs MPG for model2WA
+plot(Training$Acceleration,Training$MPG)
+lines(Training$Acceleration,coef(model2WA)[1]+coef(model2WA)[2]*Training$Acceleration)
+
+#Plot of Weight vs MPG for model2WA
+plot(Training$Weight, Training$MPG)   
+lines(Training$Weight, coef(model2WA)[1]+coef(model2WA)[3]*Training$Weight)
       
 ##########################################################################################################################
 ##########################################################################################################################
