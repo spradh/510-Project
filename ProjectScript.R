@@ -86,7 +86,7 @@ abline(0,0)
 modelA.res.abs=abs(modelA.res)
 plot(Training$Acceleration,modelA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 #Testing
-predict.A<-coef(modelA)[1]+coef(modelA)[2]* Test$Accleration
+predict.A<-coef(modelA)[1]+coef(modelA)[2]* Test$Acceleration
 e.A<-Test$MPG-predict.A
 mean(e.A)
 ##########################################################################################################################
