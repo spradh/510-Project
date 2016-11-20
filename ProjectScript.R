@@ -101,7 +101,7 @@ plot(Training$HorsePower,Training$MPG,xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model2DH)[1]+coef(model2DH)[3]*Training$HorsePower)
 #Plot of Displacement vs MPG for model2DH
 plot(Training$Displacement,Training$MPG,xlab = 'Displacement', ylab = 'MPG')
-lines(Training$Displacement,coef(model2DH)[1]+coef(model2DH)[3]*Training$Displacement)
+lines(Training$Displacement,coef(model2DH)[1]+coef(model2DH)[2]*Training$Displacement)
 #Residuals
 model2DH.res=resid(model2DH)  # For Residuals
 hist(model2DH.res,breaks = 25,main = "Histogram of Model2DH",xlab = 'Displacement') # For Histogram
@@ -266,6 +266,11 @@ model3DHW.res.abs=abs(model3DHW.res)
 plot(Training$Displacement,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$HorsePower,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 plot(Training$Weight,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+#Testing
+predict.DHW <- coef(model3DHW)[1]+coef(model3DHW)[2]*Test$Displacement+coef(model3DHW)[3]*Test$HorsePower+coef(model3DHW)[4]*Test$Weight
+e.DHW <- Test$MPG-predict.DHW
+e.DHW
+mean(e.DHW)
 ##############################################     
 #12.MPG ~ Displacement+HorsePower+Acceleration
 model3DHA <- lm(MPG ~ Displacement+HorsePower+Acceleration, data = Training)
@@ -291,6 +296,10 @@ model3DHA.res.abs=abs(model3DHA.res)
 plot(Training$Displacement,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$HorsePower,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 plot(Training$Acceleration,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+predict.DHA <- coef(model3DHA)[1]+coef(model3DHA)[2]*Test$Displacement+coef(model3DHA)[3]*Test$HorsePower+coef(model3DHA)[4]*Test$Acceleration
+e.DHA <- Test$MPG-predict.DHA
+e.DHA
+mean(e.DHA)
 ##############################################
 #13.MPG ~ Displacement+Weight+Acceleration
 model3DWA<- lm(MPG ~ Displacement+Weight+Acceleration, data = Training)
@@ -317,6 +326,11 @@ model3DWA.res.abs=abs(model3DWA.res)
 plot(Training$Displacement,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$Weight,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 plot(Training$Acceleration,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+#Testing
+predict.DWA <- coef(model3DWA)[1]+coef(model3DWA)[2]*Test$Displacement+coef(model3DWA)[3]*Test$Weight+coef(model3DWA)[4]*Test$Acceleration
+e.DWA <- Test$MPG-predict.DWA
+e.DWA
+mean(e.DWA)
 ##############################################
 #14.Model for MPG Vs HWA
 model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
@@ -343,6 +357,11 @@ model3HWA.res.abs=abs(model3HWA.res)
 plot(Training$HorsePower,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 plot(Training$Weight,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 plot(Training$Acceleration,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+#Testing
+predict.HWA <- coef(model3HWA)[1]+coef(model3HWA)[2]*Test$HorsePower+coef(model3HWA)[3]*Test$Weight+coef(model3HWA)[4]*Test$Acceleration
+e.HWA <- Test$MPG-predict.HWA
+e.HWA
+mean(e.HWA)
 ##########################################################################################################################
 ##########################################################################################################################
 #4 VARIABLE MODELS
@@ -378,6 +397,11 @@ plot(Training$Displacement,model4.res.abs,ylab = 'Absolute value of Residuals',x
 plot(Training$HorsePower,model4.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 plot(Training$Weight,model4.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 plot(Training$Acceleration,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+#Testing
+predict.4 <- coef(model4)[1]+coef(model4)[2]*Test$Displacement+coef(model4)[3]*Test$HorsePower+coef(model4)[4]*Test$Weight+coef(model4)[5]*Test$Acceleration
+e.4<-Test$MPG-predict.4
+e.4
+mean(e.4)
 ##########################################################################################################################
 ##########################################################################################################################
 # THAT'S ALL FOLKS!
