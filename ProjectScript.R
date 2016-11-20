@@ -31,6 +31,10 @@ plot(Training$Displacement,modelD.res,ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
 modelD.res.abs=abs(modelD.res)
 plot(Training$Displacement,modelD.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+#Testing
+predict.D<-coef(modelD)[1]+coef(modelD)[2]* Test$Displacement
+e.D<-Test$MPG-predict.D
+mean(e.D)
 ##############################################
 #2.MPG~HorsePower
 modelH<-lm(MPG~HorsePower, data=Training)
@@ -45,6 +49,10 @@ plot(Training$HorsePower,modelH.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 modelH.res.abs=abs(modelH.res)
 plot(Training$HorsePower,modelH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+#Testing
+predict.H<-coef(modelH)[1]+coef(modelH)[2]* Test$HorsePower
+e.H<-Test$MPG-predict.H
+mean(e.H)
 ##############################################
 #3.MPG~Weight
 modelW<-lm(MPG~Weight, data=Training)
@@ -59,6 +67,10 @@ plot(Training$Weight,modelW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 modelW.res.abs=abs(modelW.res)
 plot(Training$Weight,modelW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+#Testing
+predict.W<-coef(modelW)[1]+coef(modelW)[2]* Test$Weight
+e.W<-Test$MPG-predict.W
+mean(e.W)
 ##############################################
 #4.MPG~Acceleration
 modelA<-lm(MPG~Acceleration, data=Training)
@@ -73,6 +85,10 @@ plot(Training$Acceleration,modelA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
 modelA.res.abs=abs(modelA.res)
 plot(Training$Acceleration,modelA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+#Testing
+predict.A<-coef(modelA)[1]+coef(modelA)[2]* Test$Accleration
+e.A<-Test$MPG-predict.A
+mean(e.A)
 ##########################################################################################################################
 ##########################################################################################################################
 #2 VARIABLE MODELS
@@ -93,11 +109,13 @@ plot(Training$Displacement,model2DH.res,ylab = 'Residuals',xlab = 'Displacement'
 abline(0,0)
 plot(Training$HorsePower,model2DH.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
-
 model2DH.res.abs=abs(model2DH.res)
 plot(Training$Displacement,model2DH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$HorsePower,model2DH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
-
+#Testing
+predict.DH<-coef(model2DH)[1]+coef(model2DH)[2]* Test$Displacement+coef(model2DH)[3]*Test$HorsePower
+e.DH<-Test$MPG-predict.DH
+mean(e.DH)
 ##############################################
 #6.MPG~ Displacement+Weight
 model2DW <- lm(MPG ~ Displacement+Weight, data = Training)
@@ -115,10 +133,13 @@ plot(Training$Displacement,model2DW.res,ylab = 'Residuals',xlab = 'Displacement'
 abline(0,0)
 plot(Training$Weight,model2DW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
-
 model2DW.res.abs=abs(model2DW.res)
 plot(Training$Displacement,model2DW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$Weight,model2DW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+#Testing
+predict.DW<-coef(model2DW)[1]+coef(model2DW)[2]* Test$Displacement+coef(model2DW)[3]*Test$Weight
+e.DW<-Test$MPG-predict.DW
+mean(e.DW)
 ##############################################
 #7.MPG~Displacement+ Acceleration
 model2DA<-lm(MPG ~ Displacement+Acceleration, data = Training)
@@ -136,10 +157,13 @@ plot(Training$Displacement,model2DA.res,ylab = 'Residuals',xlab = 'Displacement'
 abline(0,0)
 plot(Training$Acceleration,model2DA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
-
 model2DA.res.abs=abs(model2DA.res)
 plot(Training$Displacement,model2DA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 plot(Training$Acceleration,model2DA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+#Testing
+predict.DA<-coef(model2DA)[1]+coef(model2DA)[2]* Test$Displacement+coef(model2DA)[3]*Test$Acceleration
+e.DA<-Test$MPG-predict.DA
+mean(e.DA)
 ##############################################
 #8.MPG ~ HorsePower+Weight 
 model2HW<-lm(MPG ~ HorsePower+Weight, data = Training)
@@ -177,10 +201,13 @@ plot(Training$HorsePower,model2HA.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 plot(Training$Acceleration,model2HA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
-
 model2HA.res.abs=abs(model2HA.res)
 plot(Training$Acceleration,model2HA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 plot(Training$HorsePower,model2HA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+#Testing
+predict.DW<-coef(model2DW)[1]+coef(model2HA)[2]* Test$Displacement+coef(model2DW)[3]*Test$Weight
+e.DW<-Test$MPG-predict.DW
+mean(e.DW)
 ##############################################
 #10.MPG ~ Acceleration+Weight 
 model2WA <- lm(MPG ~ Acceleration+Weight, data = Training)
