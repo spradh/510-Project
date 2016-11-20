@@ -29,6 +29,8 @@ modelD.res=resid(modelD)  # For Residuals
 hist(modelD.res ,breaks = 25,main = "Histogram of ModelD",xlab = 'Displacement') # For Histogram
 plot(Training$Displacement,modelD.res,ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
+modelD.res.abs=abs(modelD.res)
+plot(Training$Displacement,modelD.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
 ##############################################
 #2.MPG~HorsePower
 modelH<-lm(MPG~HorsePower, data=Training)
@@ -41,6 +43,8 @@ modelH.res=resid(modelH)  # For Residuals
 hist(modelH.res ,breaks = 25,main = "Histogram of ModelH",,xlab = 'HorsePower') # For Histogram
 plot(Training$HorsePower,modelH.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
+modelH.res.abs=abs(modelH.res)
+plot(Training$HorsePower,modelH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 ##############################################
 #3.MPG~Weight
 modelW<-lm(MPG~Weight, data=Training)
@@ -53,6 +57,8 @@ modelW.res=resid(modelW)  # For Residuals
 hist(modelW.res,breaks = 25,main = "Histogram of ModelW",xlab = 'Weight') # For Histogram
 plot(Training$Weight,modelW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
+modelW.res.abs=abs(modelW.res)
+plot(Training$Weight,modelW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 ##############################################
 #4.MPG~Acceleration
 modelA<-lm(MPG~Acceleration, data=Training)
@@ -65,6 +71,8 @@ modelA.res=resid(modelA)  # For Residuals
 hist(modelA.res,breaks = 25,main = "Histogram of ModelA",xlab = 'Acceleration') # For Histogram
 plot(Training$Acceleration,modelA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+modelA.res.abs=abs(modelA.res)
+plot(Training$Acceleration,modelA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##########################################################################################################################
 ##########################################################################################################################
 #2 VARIABLE MODELS
@@ -86,6 +94,10 @@ abline(0,0)
 plot(Training$HorsePower,model2DH.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 
+model2DH.res.abs=abs(model2DH.res)
+plot(Training$Displacement,model2DH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$HorsePower,model2DH.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+
 ##############################################
 #6.MPG~ Displacement+Weight
 model2DW <- lm(MPG ~ Displacement+Weight, data = Training)
@@ -104,6 +116,9 @@ abline(0,0)
 plot(Training$Weight,model2DW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 
+model2DW.res.abs=abs(model2DW.res)
+plot(Training$Displacement,model2DW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$Weight,model2DW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 ##############################################
 #7.MPG~Displacement+ Acceleration
 model2DA<-lm(MPG ~ Displacement+Acceleration, data = Training)
@@ -121,6 +136,10 @@ plot(Training$Displacement,model2DA.res,ylab = 'Residuals',xlab = 'Displacement'
 abline(0,0)
 plot(Training$Acceleration,model2DA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model2DA.res.abs=abs(model2DA.res)
+plot(Training$Displacement,model2DA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$Acceleration,model2DA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##############################################
 #8.MPG ~ HorsePower+Weight 
 model2HW<-lm(MPG ~ HorsePower+Weight, data = Training)
@@ -138,6 +157,9 @@ plot(Training$HorsePower,model2HW.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 plot(Training$Weight,model2HW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
+model2HW.res.abs=abs(model2HW.res)
+plot(Training$Weight,model2HW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+plot(Training$HorsePower,model2HW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 ##############################################
 #9.MPG ~ HorsePower+Acceleration 
 model2HA<-lm(MPG ~ HorsePower+Acceleration, data = Training)
@@ -155,6 +177,10 @@ plot(Training$HorsePower,model2HA.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 plot(Training$Acceleration,model2HA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model2HA.res.abs=abs(model2HA.res)
+plot(Training$Acceleration,model2HA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
+plot(Training$HorsePower,model2HA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
 ##############################################
 #10.MPG ~ Acceleration+Weight 
 model2WA <- lm(MPG ~ Acceleration+Weight, data = Training)
@@ -173,6 +199,10 @@ plot(Training$Weight,model2WA.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 plot(Training$Acceleration,model2WA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model2WA.res.abs=abs(model2WA.res)
+plot(Training$Weight,model2WA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+plot(Training$Acceleration,model2WA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##########################################################################################################################
 ##########################################################################################################################
 #3 VARIABLE MODELS
@@ -197,6 +227,11 @@ plot(Training$HorsePower,model3DHW.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 plot(Training$Weight,model3DHW.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
+
+model3DHW.res.abs=abs(model3DHW.res)
+plot(Training$Displacement,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$HorsePower,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+plot(Training$Weight,model3DHW.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
 ##############################################     
 #12.MPG ~ Displacement+HorsePower+Acceleration
 model3DHA <- lm(MPG ~ Displacement+HorsePower+Acceleration, data = Training)
@@ -218,6 +253,11 @@ plot(Training$HorsePower,model3DHA.res,ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
 plot(Training$Acceleration,model3DHA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model3DHA.res.abs=abs(model3DHA.res)
+plot(Training$Displacement,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$HorsePower,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+plot(Training$Acceleration,model3DHA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##############################################
 #13.MPG ~ Displacement+Weight+Acceleration
 model3DWA<- lm(MPG ~ Displacement+Weight+Acceleration, data = Training)
@@ -240,6 +280,11 @@ plot(Training$Weight,model3DWA.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 plot(Training$Acceleration,model3DWA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)  
+
+model3DWA.res.abs=abs(model3DWA.res)
+plot(Training$Displacement,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$Weight,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+plot(Training$Acceleration,model3DWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##############################################
 #14.Model for MPG Vs HWA
 model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
@@ -262,6 +307,11 @@ plot(Training$Weight,model3HWA.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 plot(Training$Acceleration,model3HWA.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model3HWA.res.abs=abs(model3HWA.res)
+plot(Training$HorsePower,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+plot(Training$Weight,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+plot(Training$Acceleration,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##########################################################################################################################
 ##########################################################################################################################
 #4 VARIABLE MODELS
@@ -292,6 +342,12 @@ plot(Training$Weight,model4.res,ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
 plot(Training$Acceleration,model4.res,ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
+
+model4.res.abs=abs(model4.res)
+plot(Training$Displacement,model4.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Displacement')
+plot(Training$HorsePower,model4.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Horsepower')
+plot(Training$Weight,model4.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Weight')
+plot(Training$Acceleration,model3HWA.res.abs,ylab = 'Absolute value of Residuals',xlab = 'Acceleration')
 ##########################################################################################################################
 ##########################################################################################################################
 # THAT'S ALL FOLKS!
