@@ -4,9 +4,18 @@ rownames(auto_mpg) <- seq(length=nrow(auto_mpg))
 auto_mpg$HorsePower = as.numeric(as.character(auto_mpg$HorsePower))
 Training<-auto_mpg[1:300,]
 Test<-auto_mpg[301:nrow(auto_mpg),]
-View(Test)
-View(Training)
-summary(Training)
+#Normalizing Test Dataset
+Test$Displacement<-(Test$Displacement-mean(Training$Displacement))/sd(Training$Displacement)
+Test$HorsePower<-(Test$HorsePower-mean(Training$HorsePower))/sd(Training$HorsePower)
+Test$Weight<-(Test$Weight-mean(Training$Weight))/sd(Training$Weight)
+Test$Acceleration<-(Test$Acceleration-mean(Training$Acceleration))/sd(Training$Acceleration)
+
+#Normalizing Training Dataset
+Training$Displacement<-(Training$Displacement-mean(Training$Displacement))/sd(Training$Displacement)
+Training$HorsePower<-(Training$HorsePower-mean(Training$HorsePower))/sd(Training$HorsePower)
+Training$Weight<-(Training$Weight-mean(Training$Weight))/sd(Training$Weight)
+Training$Acceleration<-(Training$Acceleration-mean(Training$Acceleration))/sd(Training$Acceleration)
+
 ##########################################################################################################################
 ##########################################################################################################################
 #Studying the relation between the explanatory and response variables
