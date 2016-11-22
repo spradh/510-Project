@@ -1,15 +1,11 @@
-
-
-
-
-
-
 auto_mpg<-read.table('auto-mpg.data',header = FALSE,col.names = c("MPG","Cylinders","Displacement","HorsePower","Weight","Acceleration","ModelYear","Origin","CarName") )
 auto_mpg <- auto_mpg[-c(33,127,331,337,355,375),]
 rownames(auto_mpg) <- seq(length=nrow(auto_mpg))
 auto_mpg$HorsePower = as.numeric(as.character(auto_mpg$HorsePower))
 Training<-auto_mpg[1:300,]
 Test<-auto_mpg[301:nrow(auto_mpg),]
+
+##########################################################################################################################
 #Normalizing Test Dataset
 Test$Displacement<-(Test$Displacement-mean(Training$Displacement))/sd(Training$Displacement)
 Test$HorsePower<-(Test$HorsePower-mean(Training$HorsePower))/sd(Training$HorsePower)
@@ -27,6 +23,7 @@ Training$Acceleration<-(Training$Acceleration-mean(Training$Acceleration))/sd(Tr
 ##########################################################################################################################
 ##########################################################################################################################
 #Studying the relation between the explanatory and response variables
+par(mfrow=c(2,2))
 plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for ModelD",xlab = "Displacement",ylab="MPG")
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for ModelH",xlab = "Horsepower",ylab="MPG")
 plot(Training$Weight,Training$MPG,main = "MPG vs Weight for ModelW",xlab = "Weight",ylab="MPG")
@@ -38,11 +35,13 @@ plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for ModelA",
 #1.MPG~Displacement
 modelD<-lm(MPG~Displacement, data=Training)
 summary(modelD)
+par(mfrow=c(1,1))
 #Plot of Displacement vs MPG for modelD
 plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for ModelD",xlab = "Displacement",ylab="MPG")
 lines(Training$Displacement,coef(modelD)[1]+coef(modelD)[2]* Training$Displacement)
 #Residuals
 modelD.res=resid(modelD)  # For Residuals
+par(mfrow=c(2,2))
 hist(modelD.res ,breaks = 25,main = "Histogram of ModelD Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,modelD.res,main = "Residuals vs Displacement for ModelD",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -56,11 +55,13 @@ mean(e.D)
 #2.MPG~HorsePower
 modelH<-lm(MPG~HorsePower, data=Training)
 summary(modelH)
+par(mfrow=c(1,1))
 #Plot of Horsepower vs MPG for modelH
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for modelH",xlab = "Horsepower",ylab="MPG")
 lines(Training$HorsePower,coef(modelH)[1]+coef(modelH)[2]* Training$HorsePower)
 #Residuals
 modelH.res=resid(modelH)  # For Residuals
+par(mfrow=c(2,2))
 hist(modelH.res ,breaks = 25,main = "Histogram of modelH Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$HorsePower,modelH.res,main = "Residuals vs HorsePower for modelH",ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
@@ -74,11 +75,13 @@ mean(e.H)
 #3.MPG~Weight
 modelW<-lm(MPG~Weight, data=Training)
 summary(modelW)
+par(mfrow=c(1,1))
 #Plot of Weight vs MPG for modelW
 plot(Training$Weight,Training$MPG,main = "MPG vs Weight for modelW",xlab = "Weight",ylab="MPG")
 lines(Training$Weight,coef(modelW)[1]+coef(modelW)[2]* Training$Weight)
 #Residuals
 modelW.res=resid(modelW)  # For Residuals
+par(mfrow=c(2,2))
 hist(modelW.res,breaks = 25,main = "Histogram of modelW Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Weight,modelW.res,main = "Residuals vs Weight for modelW",ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
@@ -92,11 +95,13 @@ mean(e.W)
 #4.MPG~Acceleration
 modelA<-lm(MPG~Acceleration, data=Training)
 summary(modelA)
+par(mfrow=c(1,1))
 #Plot of Acceleration vs MPG for modelA
 plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for modelA",xlab = "Acceleration",ylab="MPG")
 lines(Training$Acceleration,coef(modelA)[1]+coef(modelA)[2]* Training$Acceleration)
 #Residuals
 modelA.res=resid(modelA)  # For Residuals
+par(mfrow=c(2,2))
 hist(modelA.res,breaks = 25,main = "Histogram of modelA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Acceleration,modelA.res,main = "Residuals vs Acceleration for modelA",ylab = 'Residuals',xlab = 'Acceleration')
 abline(0,0)
@@ -113,6 +118,7 @@ mean(e.A)
 #5.MPG ~ Displacement+HorsePower
 model2DH<-lm(MPG ~ Displacement+HorsePower, data = Training)
 summary(model2DH)
+par(mfrow=c(1,2))
 #Plot of Horsepower vs MPG for model2DH
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for model2DH",xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model2DH)[1]+coef(model2DH)[3]*Training$HorsePower)
@@ -121,6 +127,7 @@ plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model2DH
 lines(Training$Displacement,coef(model2DH)[1]+coef(model2DH)[2]*Training$Displacement)
 #Residuals
 model2DH.res=resid(model2DH)  # For Residuals
+par(mfrow=c(2,3))
 hist(model2DH.res,breaks = 25,main = "Histogram of model2DH Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model2DH.res,main = "Residuals vs Displacement for model2DH",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -137,6 +144,7 @@ mean(e.DH)
 #6.MPG~ Displacement+Weight
 model2DW <- lm(MPG ~ Displacement+Weight, data = Training)
 summary(model2DW)
+par(mfrow=c(1,2))
 # Plot of Weight vs MPG for model2DW
 plot(Training$Weight,Training$MPG,main = "MPG vs Weight for model2DW",xlab = 'Weight', ylab = 'MPG')
 lines(Training$Weight,coef(model2DW)[1]+coef(model2DW)[3]*Training$Weight)
@@ -145,6 +153,7 @@ plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model2DW
 lines(Training$Displacement,coef(model2DW)[1]+coef(model2DW)[2]*Training$Displacement)
 #Residuals
 model2DW.res=resid(model2DW)  # For Residuals
+par(mfrow=c(2,3))
 hist(model2DW.res,breaks = 25,main = "Histogram of model2DW Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model2DW.res,main = "Residuals vs Displacement for model2DW",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -161,6 +170,7 @@ mean(e.DW)
 #7.MPG~Displacement+ Acceleration
 model2DA<-lm(MPG ~ Displacement+Acceleration, data = Training)
 summary(model2DA)
+par(mfrow=c(1,2))
 # Plot of Acceleration vs MPG for model2DA
 plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model2DA",xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model2DA)[1]+coef(model2DA)[3]*Training$Acceleration)
@@ -169,6 +179,7 @@ plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model2DA
 lines(Training$Displacement,coef(model2DA)[1]+coef(model2DA)[2]*Training$Displacement)
 #Residuals
 model2DA.res=resid(model2DA)  # For Residuals
+par(mfrow=c(2,3))
 hist(model2DA.res,breaks = 25,main = "Histogram of model2DA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model2DA.res,main = "Residuals vs Displacement for model2DA",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -185,6 +196,7 @@ mean(e.DA)
 #8.MPG ~ HorsePower+Weight 
 model2HW<-lm(MPG ~ HorsePower+Weight, data = Training)
 summary(model2HW)
+par(mfrow=c(1,2))
 # Plot of Horsepower vs MPG for model2HW
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for model2HW",xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model2HW)[1]+coef(model2HW)[2]*Training$HorsePower)
@@ -193,6 +205,7 @@ plot(Training$Weight,Training$MPG,main = "MPG vs Weight for model2HW",xlab = 'We
 lines(Training$Weight,coef(model2HW)[1]+coef(model2HW)[3]*Training$Weight)
 #Residuals
 model2HW.res=resid(model2HW)  # For Residuals
+par(mfrow=c(2,3))
 hist(model2HW.res,breaks = 25,main = "Histogram of model2HW Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$HorsePower,model2HW.res,main = "Residuals vs HorsePower for model2HW",ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
@@ -209,6 +222,7 @@ mean(e.HW)
 #9.MPG ~ HorsePower+Acceleration 
 model2HA<-lm(MPG ~ HorsePower+Acceleration, data = Training)
 summary(model2HA)
+par(mfrow=c(1,2))
 # Plot of Horsepower vs MPG for model2HA
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for model2HA",xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model2HA)[1]+coef(model2HA)[2]*Training$HorsePower)    
@@ -217,6 +231,7 @@ plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model2HA
 lines(Training$Acceleration,coef(model2HA)[1]+coef(model2HA)[3]*Training$Acceleration)
 #Residuals   
 model2HA.res=resid(model2HA) # For Residuals
+par(mfrow=c(2,3))
 hist(model2HA.res,breaks = 25,main = "Histogram of Model2HA",xlab = 'Residuals') # For Histogram
 plot(Training$HorsePower,model2HA.res,main = "Residuals vs HorsePower for model2HA",ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
@@ -234,6 +249,7 @@ mean(e.HA)
 model2WA <- lm(MPG ~ Weight+Acceleration, data = Training)
 summary(model2WA)
 coef(model2WA)
+par(mfrow=c(1,2))
 # Plot of Acceleration vs MPG for model2WA
 plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model2WA",xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model2WA)[1]+coef(model2WA)[3]*Training$Acceleration)
@@ -242,6 +258,7 @@ plot(Training$Weight, Training$MPG,main = "MPG vs Weight for model2WA",xlab = 'W
 lines(Training$Weight, coef(model2WA)[1]+coef(model2WA)[2]*Training$Weight)     
 #Residuals
 model2WA.res=resid(model2WA)  # For Residuals
+par(mfrow=c(2,3))
 hist(model2WA.res,breaks = 25,main = "Histogram of model2WA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Weight,model2WA.res,main = "Residuals vs Weight for model2WA",ylab = 'Residuals',xlab = 'Weight')
 abline(0,0)
@@ -261,6 +278,7 @@ mean(e.WA)
 #11.MPG ~ Displacement+HorsePower+Weight 
 model3DHW <- lm(MPG ~ Displacement+HorsePower+Weight, data = Training)
 summary(model3DHW)
+par(mfrow=c(2,2))
 #Plot of Displacement vs MPG for model3DHW    
 plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model3DHW",xlab = 'Displacement', ylab = 'MPG')
 lines(Training$Displacement,coef(model3DHW)[1]+coef(model3DHW)[2]*Training$Displacement)     
@@ -272,6 +290,7 @@ plot(Training$Weight,Training$MPG,main = "MPG vs Weight for model3DHW",xlab = 'W
 lines(Training$Weight,coef(model3DHW)[1]+coef(model3DHW)[4]*Training$Weight)   
 #Residuals
 model3DHW.res=resid(model3DHW)  # For Residuals
+par(mfrow=c(3,3))
 hist(model3DHW.res,breaks = 25,main = "Histogram of model3DHW Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model3DHW.res,main = "Residuals vs Displacement for model3DHW",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -291,17 +310,19 @@ mean(e.DHW)
 #12.MPG ~ Displacement+HorsePower+Acceleration
 model3DHA <- lm(MPG ~ Displacement+HorsePower+Acceleration, data = Training)
 summary(model3DHA)
-# Plot for Acceleration vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
+par(mfrow=c(2,2))
+# Plot for Acceleration vs MPG with coef of model3DHA (MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
 plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model3DHA",xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model3DHA)[1]+coef(model3DHA)[4]*Training$Acceleration)
-# Plot for HorsePower vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
+# Plot for HorsePower vs MPG with coef of model3DHA (MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for model3DHA",xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model3DHA)[1]+coef(model3DHA)[3]*Training$HorsePower)
-# Plot for DISPLACEMENT vs MPG with coef of model 5(MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
+# Plot for DISPLACEMENT vs MPG with coef of model3DHA (MPG Vs ACCELERATION,HORSEPOWER,DISPLACEMENT)
 plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model3DHA",xlab = 'Displacement', ylab = 'MPG')
 lines(Training$Displacement,coef(model3DHA)[1]+coef(model3DHA)[2]*Training$Displacement)
 #Residuals
 model3DHA.res=resid(model3DHA)  # For Residuals
+par(mfrow=c(3,3))
 hist(model3DHA.res,breaks = 25,main = "Histogram of model3DHA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model3DHA.res,main = "Residuals vs Displacement for model3DHA",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -320,6 +341,7 @@ mean(e.DHA)
 #13.MPG ~ Displacement+Weight+Acceleration
 model3DWA<- lm(MPG ~ Displacement+Weight+Acceleration, data = Training)
 summary(model3DWA)
+par(mfrow=c(2,2))
 # Plot of Acceleration vs MPG for model3DWA
 plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model3DWA",xlab = 'Acceleration', ylab = 'MPG')
 lines(Training$Acceleration,coef(model3DWA)[1]+coef(model3DWA)[4]*Training$Acceleration)
@@ -331,6 +353,7 @@ plot(Training$Displacement,Training$MPG,main = "MPG vs Displacement for model3DW
 lines(Training$Displacement,coef(model3DWA)[1]+coef(model3DWA)[2]*Training$Displacement)
 #Residuals
 model3DWA.res=resid(model3DWA)  # For Residuals
+par(mfrow=c(3,3))
 hist(model3DWA.res,breaks = 25,main = "Histogram of model3DWA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$Displacement,model3DWA.res,main = "Residuals vs Displacement for model3DWA",ylab = 'Residuals',xlab = 'Displacement')
 abline(0,0)
@@ -350,6 +373,7 @@ mean(e.DWA)
 #14.Model for MPG Vs HWA
 model3HWA <- lm(MPG ~ HorsePower+Weight+Acceleration, data = Training)
 summary(model3HWA )
+par(mfrow=c(2,2))
 #Plot of Horsepower vs MPG for model3HWA
 plot(Training$HorsePower,Training$MPG,main = "MPG vs HorsePower for model3HWA",xlab = 'Horsepower', ylab = 'MPG')
 lines(Training$HorsePower,coef(model3HWA)[1]+coef(model3HWA )[2]*Training$HorsePower)
@@ -361,6 +385,7 @@ plot(Training$Acceleration,Training$MPG,main = "MPG vs Acceleration for model3HW
 lines(Training$Acceleration,coef(model3HWA )[1]+coef(model3HWA )[4]*Training$Acceleration)
 #Residuals
 model3HWA.res=resid(model3HWA)  # For Residuals
+par(mfrow=c(3,3))
 hist(model3HWA.res,breaks = 25,main = "Histogram of model3HWA Residuals ",xlab = 'Residuals') # For Histogram
 plot(Training$HorsePower,model3HWA.res,main = "Residuals vs HorsePower for model3HWA",ylab = 'Residuals',xlab = 'HorsePower')
 abline(0,0)
@@ -420,5 +445,3 @@ mean(e.4)
 ##########################################################################################################################
 ##########################################################################################################################
 # THAT'S ALL FOLKS!
-
-
