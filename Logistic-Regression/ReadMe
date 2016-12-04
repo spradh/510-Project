@@ -1,3 +1,11 @@
 *In progress
 
 R script is logRegScript.R
+
+
+To Do:
+
+1. Figure out how to work with class explanatory variables
+2. What are the things we need to look at when chossing best model.
+3. Using variable with test set.
+4. Plots
