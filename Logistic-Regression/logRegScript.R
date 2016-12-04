@@ -2,6 +2,7 @@ heart<-read.csv('Heart.csv', header=TRUE)
 View(heart)
 nrow(heart)
 heart<-heart[,-1]
+class(heart)
 
 #Cleaning Response Variable
 heart$AHD<-heart$AHD=="Yes"
@@ -19,7 +20,7 @@ heart<-heart[,-3]
 #Creating dummy variables for Thal
 heart$thalFixed<-heart$Thal=="fixed"
 heart$thalNormal<-heart$Thal=="normal"
-heart$thanReversable<-heart$Thal=="reversable"
+heart$thalReversable<-heart$Thal=="reversable"
 heart<-heart[,-12] #removing Thal
 
 
