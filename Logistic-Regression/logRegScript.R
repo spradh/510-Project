@@ -51,9 +51,93 @@ test<-heart[251:nrow(heart),]
 View(train)
 View(test)
 
-#Traning Model with all variables
+
+#Traning Model with all variables included
 model<-glm(AHD~.,family=binomial,data=train)
 summary(model)
 
+#Removing slope3
+model<-glm(AHD~Age+Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+             thalNormal+thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing Age
+model<-glm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+             thalNormal+thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing ThalNormal
+model<-glm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing chestPainNonAngial
+model<-glm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNontypical+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing chestpainNontypical
+model<-glm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing ExAng
+model<-glm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing Chol
+model<-glm(AHD~Sex+RestBP+Fbs+RestECG+MaxHR+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing MaxHR
+model<-glm(AHD~Sex+RestBP+Fbs+RestECG+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing Fbs
+model<-glm(AHD~Sex+RestBP+RestECG+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing RestECG
+model<-glm(AHD~Sex+RestBP+Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing Sex
+model<-glm(AHD~Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3+slope2,family=binomial,data=train)
+summary(model)
+
+#Removing slope2
+model<-glm(AHD~Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca2+ca3,family=binomial,data=train)
+summary(model)
+
+#Removing ca2
+model<-glm(AHD~Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1+ca3,family=binomial,data=train)
+summary(model)
+
+#Removing ca3
+model<-glm(AHD~Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1,family=binomial,data=train)
+summary(model)
 
 
