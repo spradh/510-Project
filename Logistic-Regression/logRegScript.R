@@ -1,13 +1,15 @@
+#Importing CSV data set
 heart<-read.csv('Heart.csv', header=TRUE)
-View(heart)
-nrow(heart)
-heart<-heart[,-1]
+
+#omitting incomplete rows in dataset 
+heart<-na.omit(heart[,-1])
 
 summary(heart)
 
 #Cleaning Response Variable
 heart$AHD<-heart$AHD=="Yes"
 
+#Checking levels of categorical variables
 levels(heart$Slope)
 levels(heart$ChestPain)
 levels(heart$Thal)
@@ -40,12 +42,18 @@ heart<-heart[,-10]
 
 View(heart)
 
+#Checking coorelations
 cor(heart,method="pearson")
+
+#Creating Training and Test data sets.
 train<-heart[1:250,]
 test<-heart[251:nrow(heart),]
 View(train)
 View(test)
 
-#Traning data set
+#Traning Model with all variables
 model<-glm(AHD~.,family=binomial,data=train)
 summary(model)
+
+
+
