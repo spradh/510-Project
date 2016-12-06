@@ -36,3 +36,9 @@ heart$slope3<-heart$Slope==3
 heart<-heart[,-10]
 
 View(heart)
+
+
+train<-heart[1:250,]
+test<-heart[251:nrow(heart),]
+View(train)
+View(test)
