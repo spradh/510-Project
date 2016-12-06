@@ -22,18 +22,17 @@ heart$thalNormal<-heart$Thal=="normal"
 heart$thanReversable<-heart$Thal=="reversable"
 heart<-heart[,-12] #removing Thal
 
+#Creating dummy variables for CA
+heart$ca1<-heart$Ca==0
+heart$ca1<-heart$Ca==1
+heart$ca2<-heart$Ca==2
+heart$ca3<-heart$Ca==3
+heart<-heart[,-11]
+
+#Creating dummy variables for slope
+heart$slope1<-heart$Slope==1
+heart$slope2<-heart$Slope==2
+heart$slope3<-heart$Slope==3
+heart<-heart[,-10]
 
 View(heart)
-
-
-train<-heart[1:250,]
-test<-heart[251:nrow(heart),]
-View(train)
-View(test)
-
-#Traning data set
-model<-glm(AHD~ Ca,family=binomial,data=train)
-summary(model)
-
-fitted_pi=1/(1+exp(-coef(model)[1]-coef(model)[2]*train$Ca))
-plot(train$Ca,fitted_pi, ylim =c(0,1) )
