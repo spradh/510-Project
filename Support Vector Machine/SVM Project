@@ -1,0 +1,66 @@
+#Importing CSV data set
+heart<-read.csv('Heart.csv', header=TRUE)
+View(heart)
+
+#omitting incomplete rows in dataset 
+heart<-na.omit(heart[,-1])
+
+summary(heart)
+
+#Cleaning Response Variable
+heart$AHD<-heart$AHD=="Yes"
+
+#Checking levels of categorical variables
+levels(heart$Slope)
+levels(heart$ChestPain)
+levels(heart$Thal)
+
+#Creating Dummy Variables for Chestpain
+#ChestPain Typical is Control group
+heart$chestpainAsymtomatic<-heart$ChestPain=="asymptomatic"
+heart$chestpainNonanginal<-heart$ChestPain=="nonanginal"
+heart$chestpainNontypical<-heart$ChestPain=="nontypical"
+heart<-heart[,-3]
+
+#Creating dummy variables for Thal
+#Thal=fixed is control group
+heart$thalNormal<-heart$Thal=="normal"
+heart$thanReversable<-heart$Thal=="reversable"
+heart<-heart[,-12] #removing Thal
+
+#Creating dummy variables for CA
+#CA=0 is control group
+heart$ca1<-heart$Ca==1
+heart$ca2<-heart$Ca==2
+heart$ca3<-heart$Ca==3
+heart<-heart[,-11]
+
+#Creating dummy variables for slope
+#Slope=1 is control group
+heart$slope2<-heart$Slope==2
+heart$slope3<-heart$Slope==3
+heart<-heart[,-10]
+
+View(heart)
+
+#Checking coorelations
+cor(heart,method="pearson")
+
+cols <- sapply(heart, is.logical)
+heart[,cols] <- lapply(heart[,cols], as.numeric)
+head(heart)
+View(heart)
+
+#Creating Training and Test data sets.
+train<-heart[1:250,]
+test<-heart[251:nrow(heart),]
+View(train)
+View(test)
+
+x<-subset(train,select=-AHD)
+model<-svm(AHD~Age+Sex,data=train,kernel="linear",scale=FALSE)
+summary(model)
+y<-train$AHD
+pred<-predict(model,x)
+pred
+table(pred,y)
