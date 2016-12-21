@@ -8,7 +8,7 @@ heart<-na.omit(heart[,-1])
 summary(heart)
 
 #Cleaning Response Variable
-heart$AHD<-heart$AHD=="Yes"
+#heart$AHD<-heart$AHD=="Yes"
 
 #Checking levels of categorical variables
 levels(heart$Slope)
@@ -57,10 +57,66 @@ test<-heart[251:nrow(heart),]
 View(train)
 View(test)
 
+plot(cmdscale(dist(heart[,-10])),col=as.integer(iris[,5]),pch=c("o","+")[1:250 %in% model$index +1])
+
+#All Variables
+model<-svm(AHD~.,data=train)
+#summary(model)
 x<-subset(train,select=-AHD)
-model<-svm(AHD~Age+Sex,data=train,kernel="linear",scale=FALSE)
-summary(model)
 y<-train$AHD
-pred<-predict(model,x)
-pred
+pred<-predict(model)
 table(pred,y)
+predTest<-predict(model, subset(test,select=-AHD))
+ytest<-test$AHD
+table(predTest,ytest)
+
+#Oldpeak+ chestpainAsymtomatic+   thanReversable+ca1
+model<-svm(AHD~Oldpeak+
+             chestpainAsymtomatic+
+             thanReversable+ca1,data=train)
+#summary(model)
+x<-subset(train,select=c(Oldpeak,chestpainAsymtomatic,thanReversable,ca1))
+y<-train$AHD
+pred<-predict(model)
+table(pred,y)
+predTest<-predict(model, subset(test,select=-AHD))
+ytest<-test$AHD
+table(predTest,ytest)
+
+#Age+Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+ chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+ # thalNormal+thanReversable+ca1+ca2+ca3+slope2
+
+
+model<-svm(AHD~Age+Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+             thalNormal+thanReversable+ca1+ca2+ca3+slope2,data=train)
+#summary(model)
+x<-subset(train,select=c(Age,Sex,RestBP,Chol,Fbs,RestECG,MaxHR,ExAng,Oldpeak,
+                           chestpainAsymtomatic,chestpainNonanginal,chestpainNontypical,
+                           thalNormal,thanReversable,ca1,ca2,ca3,slope2))
+y<-train$AHD
+pred<-predict(model)
+table(pred,y)
+predTest<-predict(model, subset(test,select=c(Age,Sex,RestBP,Chol,Fbs,RestECG,MaxHR,ExAng,Oldpeak,chestpainAsymtomatic,chestpainNonanginal,chestpainNontypical,thalNormal,thanReversable,ca1,ca2,ca3,slope2)))
+ytest<-test$AHD
+table(predTest,ytest)
+
+
+#Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+ # chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+  #thalNormal+thanReversable+ca1+ca2+ca3+slope2
+
+
+model<-svm(AHD~Sex+RestBP+Chol+Fbs+RestECG+MaxHR+ExAng+Oldpeak+
+             chestpainAsymtomatic+chestpainNonanginal+chestpainNontypical+
+             thalNormal+thanReversable+ca1+ca2+ca3+slope2,data=train)
+#summary(model)
+x<-subset(train,select=c(Sex,RestBP,Chol,Fbs,RestECG,MaxHR,ExAng,Oldpeak,
+                         chestpainAsymtomatic,chestpainNonanginal,chestpainNontypical,
+                         thalNormal,thanReversable,ca1,ca2,ca3,slope2))
+y<-train$AHD
+pred<-predict(model)
+table(pred,y)
+predTest<-predict(model, subset(test,select=c(Sex,RestBP,Chol,Fbs,RestECG,MaxHR,ExAng,Oldpeak,chestpainAsymtomatic,chestpainNonanginal,chestpainNontypical,thalNormal,thanReversable,ca1,ca2,ca3,slope2)))
+ytest<-test$AHD
+table(predTest,ytest)
