@@ -27,6 +27,6 @@ dim(training)
 ######################
 #Test Data
 ######################
-test=data[-trainingIndex,]
+test<-data[-trainingIndex,]
 dim(test)
 View(test)
