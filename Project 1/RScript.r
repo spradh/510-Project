@@ -121,34 +121,26 @@ accuracy.GLM #0.9507042
 #install.packages('class')
 #create your classifier
 library(class)
-elbow_method = vector(); #FINDING THE BEST K
-k_range = (1:100)
-k_range = as.numeric(as.character(k_range))
-for( i in k_range){
-  y_pred_knn = knn(train = training_set[,2:31],
-                   test = test_set[, -1],
-                   cl = training_set[, 1],
-                   k = i)#vector of prediction
-  y_pred_knn=as.numeric(as.character(y_pred_knn))
-  sq_error = (y_pred_knn-mean(y_pred_knn))^2
-  sse = sum(sq_error)
-  #wss = (nrow(mydata)-1)*sum(apply(mydata,2,var))
-  #for (i in 2:15) wss[i] <- sum(kmeans(mydata,
-  #centers=i)$withinss)
-  #plot(1:15, wss, type="b", xlab="Number of Clusters",
-  #ylab="Within groups sum of squares")
-  #confusion matrix
-  #cm_knn = table(test_set[,1], y_pred_knn)
-  #accuracy_knn = (cm_knn[1,1] + cm_knn[2,2]) / (cm_knn[1,1] + cm_knn[2,2] + cm_knn[1,2] + cm_knn[2,1])
-  elbow_method[i] = sse
+
+
+classifier.knn.list<-vector()
+accuracy.knn<-vector()
+for(i in seq(1,100, by=1)){
+  cls<-paste("classifier.knn.",i,sep="");
+  classifier.knn.list<-c(classifier.knn.list, cls)
+  
+  acc<-paste("accuracy.knn.",i,sep="");
+  accuracy.knn.List<-c(accuracy.knn.List, acc)
+  
+  classifier.knn<-knn(trainingFactors,test,trainingDiagnosis,k=i)
+  accuracy.knn<-c(accuracy.knn, sum(classifier.knn==testDiagnosis)/length(testDiagnosis))
+  
+  assign(cls, classifier.knn)
+  
 }
-
-k_accuracy = cbind(k_range, elbow_method)
-plot(k_range, elbow_method)
-min_error = min(elbow_method)
-print(k_range[elbow_method=min_error])#for k=2
-
-
+plot(seq(1,100, by=1),xlab="Nearest Neighbors",ylab="Accuracy",accuracy.knn,type='l',main="Accuracy Plot for k-NN")
+max(accuracy.knn)    # 0.971831
+classifier.knn.list[max(accuracy.knn)==accuracy.knn]
 
 #########################################################################
 
@@ -157,6 +149,7 @@ print(k_range[elbow_method=min_error])#for k=2
 #library(e1071)
 
 #SVM kernel= 'linear'
+#########################
 classifier.SVM.linear = svm(formula = trainingDiagnosis ~ .,
                             data = training,
                             type = 'C-classification',
@@ -172,6 +165,7 @@ accuracy.SVM.linear
 
 
 #SVM kernel= 'rbf'
+#########################
 classifier.SVM.rbf = svm(formula = trainingDiagnosis ~ .,
                             data = training,
                             type = 'C-classification',
@@ -187,6 +181,7 @@ accuracy.SVM.rbf
 
 
 #SVM kernel= 'polynomial'
+#########################
 classifier.SVM.polynomial = svm(formula = trainingDiagnosis ~ .,
                          data = training,
                          type = 'C-classification',
@@ -203,6 +198,7 @@ accuracy.SVM.polynomial#0.8521127
 
 
 #SVM kernel= 'sigmoid'
+#########################
 classifier.SVM.sigmoid = svm(formula = trainingDiagnosis ~ .,
                                 data = training,
                                 type = 'C-classification',
