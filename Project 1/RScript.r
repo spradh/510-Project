@@ -7,6 +7,11 @@ names(data)<-c('id',"outcome","time",
                "radiusSE","textureSE","perimeterSE","areaSE","smoothnessSE","compactnessSE","concavitySE","concavePointsSE","symmetrySE","fractalDimensionSE",
                "radiusW","textureW","perimeterW","areaW","smoothnessW","compactnessW","concavityW","concavePointsW","symmetryW","fractalDimensionW",
                "tumorSize","lymphNodeStatus")
+
+# Encoding categorical data
+dataset$outcome <- factor(dataset$outcome, levels = c('M', 'B'), labels = c(1, 0))
+dataset$outcome <- as.numeric(as.character(dataset$outcome))
+
 header<-names(data)
 View(data)
 dim(data)
