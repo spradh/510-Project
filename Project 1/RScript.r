@@ -13,7 +13,7 @@ dim(data)
 ######################
 #Training Data
 ######################
-seed(10)
+set.seed(10)
 #Assisning training data set size as 75% of total data
 training_size<-round(dim(data)[1]*.75)
 training_size
