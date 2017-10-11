@@ -1,7 +1,7 @@
 ######################
 #Importing Data
 ######################
-data<-read.csv("wpbc.data",header = FALSE)
+data<-read.csv("wdbc.data",header = FALSE)
 names(data)<-c('id',"outcome","time",
                "radiusM","textureM","perimeterM","areaM","smoothnessM","compactnessM","concavityM","concavePointsM","symmetryM","fractalDimensionM",
                "radiusSE","textureSE","perimeterSE","areaSE","smoothnessSE","compactnessSE","concavitySE","concavePointsSE","symmetrySE","fractalDimensionSE",
