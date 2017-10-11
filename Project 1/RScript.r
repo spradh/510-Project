@@ -24,9 +24,33 @@ trainingIndex
 training<-data[trainingIndex,]
 View(training)
 dim(training)
+nonFactor<-training[,1:3]
+View(nonFactor)
+factors<-data.matrix(training[,4:35], rownames.force = NA)
+View(factors)
+factorMean<-colMeans(factors)
+factorMean
+factorSd<-colSds(factors) #matrixStats Package was used for the colSds function
+factorSd
+factors<-scale(factors,center = TRUE,scale = TRUE)
+View(factors)
+training<-cbind(factors,nonFactor[,2]=='R')
+View(training)
+
 ######################
 #Test Data
 ######################
 test<-data[-trainingIndex,]
+View(test)
+testNonFactors<-test[,1:3]
+testFactors<-test[,4:35]
+View(testFactors)
+(testFactors[1,]-factorMean)
+for(i in 1:dim(test)[2]){
+  testFactors[i,]<-(testFactors[i,]-factorMean)/factorSd
+}
+
+View(testFactors)
+
 dim(test)
 View(test)
