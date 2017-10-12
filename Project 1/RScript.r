@@ -10,10 +10,8 @@ names(data)<-c('id',"diagnosis",
 # Encoding categorical data
 data$diagnosis = factor(data$diagnosis,
                     levels = c('M', 'B'),
-                    labels = c(1, 0))
-id<-data[,1]
-data<-data[,-1]        #taking the patient ids aways for modelling purpose
-header<-names(data)
+                    labels = c(TRUE, FALSE))
+
 dim(data)
 
 ######################
@@ -30,6 +28,8 @@ trainingIndex<-sample(1:dim(data)[1], size = training_size,replace = FALSE)
 
 #Assigning the training set
 training<-data[trainingIndex,]
+trainingId<-training[,1]
+training<-training[,-1]
 dim(training)
 
 #separating nonfactors before scaling
@@ -46,24 +46,22 @@ trainingFactors<-predict(prep,trainingFactors)
 training<-cbind.data.frame(trainingFactors,trainingDiagnosis)
 View(training)
 dim(training)
-
+trainingHeader<-names(training)
+View(training)
 ######################
 #Test Data
 ######################
 test<-data[-trainingIndex,]
-View(test)
+testID<-test[,1]
+test<-test[,-1]
 dim(test)
 sapply(test,class)
 testDiagnosis<-test[,1]
 testFactors<-data.matrix(test[,2:31], rownames.force = NA)
 class(testFactors)
-
 test<-predict(prep,testFactors)
-
 test<-data.frame(test)
-dim(test)
 View(test)
-
 
 
 
@@ -105,18 +103,18 @@ classifier.GLM
 #predicting the Test set results
 testPred.GLM=predict(classifier.GLM, type = 'response', newdata = test)
 class(testPred.GLM)
-testPred.GLM<-testPred.GLM>=0.5
+testPred.GLM<-testPred.GLM>0.5
 testPred.GLM
 
 #confusion matrix
 cm.GLM = table(testDiagnosis, testPred.GLM)
 cm.GLM
 accuracy.GLM = (cm.GLM[1,1] + cm.GLM[2,2]) / sum(cm.GLM)
-accuracy.GLM #0.9507042
+accuracy.GLM        #0.9507042
 
-
-############################################################
+#####################
 #K-NN
+#####################
 #fit K-NN to the Training set and predict Test set results
 #install.packages('class')
 #create your classifier
@@ -125,23 +123,28 @@ library(class)
 
 classifier.knn.list<-vector()
 accuracy.knn<-vector()
-for(i in seq(1,100, by=1)){
+misplaced<-vector()
+for(i in seq(1,427, by=1)){
   cls<-paste("classifier.knn.",i,sep="");
   classifier.knn.list<-c(classifier.knn.list, cls)
+
   
-  acc<-paste("accuracy.knn.",i,sep="");
-  accuracy.knn.List<-c(accuracy.knn.List, acc)
-  
-  classifier.knn<-knn(trainingFactors,test,trainingDiagnosis,k=i)
+  classifier.knn<-knn(trainingFactors,test,trainingDiagnosis,k=i,prob = TRUE)
   accuracy.knn<-c(accuracy.knn, sum(classifier.knn==testDiagnosis)/length(testDiagnosis))
-  
+  misplaced<-c(misplaced, sum(classifier.knn!=testDiagnosis))
   assign(cls, classifier.knn)
   
 }
-plot(seq(1,100, by=1),xlab="Nearest Neighbors",ylab="Accuracy",accuracy.knn,type='l',main="Accuracy Plot for k-NN")
+plot(seq(1,427, by=1),accuracy.knn,xlab="Nearest Neighbors",ylab="Accuracy",type='l',main="Accuracy Plot for k-NN")
+plot(seq(1,427, by=1),misplaced ,xlab="Nearest Neighbors",ylab="Misplaced Observations",type='l',main="Misplaced Observation Plot for k-NN")
+
 max(accuracy.knn)    # 0.971831
 classifier.knn.list[max(accuracy.knn)==accuracy.knn]
 
+cm.knn.7<- table(testDiagnosis, classifier.knn.7)
+cm.knn.7
+accuracy.knn.best<-(cm.knn.7[1,1]+cm.knn.7[2,2])/sum(cm.knn.7)
+accuracy.knn.best
 #########################################################################
 
 # Fitting SVM to the Training set
